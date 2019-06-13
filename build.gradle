@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'com.efnilite:redaktor-api'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile files("libs/spigot-1.14.jar")
+    compile files("libs/spigot-1.13.jar")
+}
