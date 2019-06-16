@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 /**
  * A class for writing currently existing commands to files.
+ *
+ * @author Efnilite
  */
 public class CommandWriter {
 

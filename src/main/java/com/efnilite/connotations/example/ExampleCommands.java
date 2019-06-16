@@ -8,8 +8,11 @@ import org.bukkit.command.CommandSender;
  * An example class for commands.
  * <p>
  * Steps to register your own command class:
+ * <p>
  * 1 - Create a new Class
+ * <p>
  * 2 - Make it implement {@link Commandable}
+ * <p>
  * 3 - Create a method that has the {@link Command}
  * <p>
  * Note: the method name is the name of the command!
@@ -17,6 +20,8 @@ import org.bukkit.command.CommandSender;
  * <p>
  * Note: the method must have the args as CommandSender and String[].
  * Variable name does not matter.
+ *
+ * @author Efnilite
  */
 public class ExampleCommands implements Commandable {
 

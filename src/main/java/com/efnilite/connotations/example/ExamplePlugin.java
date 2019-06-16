@@ -7,6 +7,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  * An example plugin class using Connotations.
  *
  * @see ExampleCommands
+ *
+ * @author Efnilite
  */
 public class ExamplePlugin extends JavaPlugin {
 
