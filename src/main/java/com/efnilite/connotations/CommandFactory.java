@@ -10,7 +10,9 @@ import org.bukkit.plugin.Plugin;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * The main reference class for registering commands
@@ -22,6 +24,8 @@ public class CommandFactory implements CommandExecutor {
 
     private Plugin plugin;
     private CommandMap map;
+    private CommandWriter writer;
+    private List<String> registeredCommands;
     private HashMap<String, CommandInstanceMap> methods;
 
     /**
@@ -32,6 +36,7 @@ public class CommandFactory implements CommandExecutor {
      */
     public CommandFactory(Plugin plugin) {
         this.plugin = plugin;
+        this.registeredCommands = new ArrayList<>();
         this.methods = new HashMap<>();
         try {
             Field field = Bukkit.getServer().getClass().getDeclaredField("commandMap");
@@ -40,6 +45,7 @@ public class CommandFactory implements CommandExecutor {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
+        this.writer = new CommandWriter(plugin, this);
     }
 
     /**
@@ -73,8 +79,49 @@ public class CommandFactory implements CommandExecutor {
                 }
                 map.register(plugin.getName().toLowerCase(), pluginCommand);
                 methods.put(name, new CommandInstanceMap(method, commandable));
+                registeredCommands.add(name);
             }
         }
+    }
+
+    /**
+     * Gets a list of all returned methods (gettable by name)
+     *
+     * @return the methods
+     */
+    public HashMap<String, CommandInstanceMap> getMethods() {
+        return methods;
+    }
+
+    /**
+     * Gets the CommandWriter
+     *
+     * @see CommandWriter
+     *
+     * @return  the CommandWriter
+     */
+    public CommandWriter getWriter() {
+        return writer;
+    }
+
+    /**
+     * Returns all registered commands (the name)
+     *
+     * @see CommandWriter
+     *
+     * @return the registered commands
+     */
+    public List<String> getRegisteredCommands() {
+        return registeredCommands;
+    }
+
+    /**
+     * Get the CommandMap
+     *
+     * @return the map
+     */
+    public CommandMap getMap() {
+        return map;
     }
 
     @Override
